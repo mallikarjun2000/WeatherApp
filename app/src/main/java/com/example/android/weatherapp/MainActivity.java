@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         /// get the current time
         SimpleDateFormat sdf = new SimpleDateFormat("HH");
         int str = Integer.parseInt(sdf.format(new Date()));
-        if(str >= 18) {
+        if(str >= 18 || str <= 6) {
             r1.setBackgroundResource(R.drawable.nightlight);
         }
         else
