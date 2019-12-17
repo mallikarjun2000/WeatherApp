@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +37,6 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 WeatherTask weatherTask = new WeatherTask();
                 weatherTask.execute(WEATHER_URL);
-                Toast.makeText(MainActivity.this, "Temperature Updated!", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -48,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         r1 = findViewById(R.id.relative_layout);
         stats=findViewById(R.id.status_view);
         temp = findViewById(R.id.temp_view);
+        temp.setText("HI");
         maxtemp = findViewById(R.id.max_temp);
         mintemp = findViewById(R.id.min_temp);
         dateview = findViewById(R.id.date_view);
@@ -62,13 +63,10 @@ public class MainActivity extends AppCompatActivity {
         else
         {
             r1.setBackgroundResource(R.drawable.sunrise);
-            //temp.setTextColor(getResources().getColor(R.color.Black));
+            temp.setTextColor(getResources().getColor(R.color.Black));
 
         }
         stats.setText(weather.getMain());
-
-
-        //Get the current date
 
         temp.setText(String.valueOf(weather.getTemperature())+".C");
         maxtemp.setText(""+weather.getMaximum()+".C");
@@ -76,14 +74,9 @@ public class MainActivity extends AppCompatActivity {
         city.setText(""+weather.getCity());
         hum.setText("Humidity :"+weather.getHumidity());
 
-        String dateStr = "04/05/2010";
-
-        SimpleDateFormat curFormater = new SimpleDateFormat("dd/MM/yyyy");
-        Date dateObj = curFormater.parse(dateStr);
-        SimpleDateFormat postFormater = new SimpleDateFormat("MMMM dd, yyyy");
-
-        String newDateStr = postFormater.format(dateObj);
-        dateview.setText(newDateStr);
+        //Get Date in a single line remember this
+        String datei = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(new Date());
+        dateview.setText(datei);
 
 
     }

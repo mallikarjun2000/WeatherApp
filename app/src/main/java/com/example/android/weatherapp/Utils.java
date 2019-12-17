@@ -2,6 +2,7 @@ package com.example.android.weatherapp;
 
 import android.util.JsonReader;
 import android.util.Log;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -69,8 +70,11 @@ public class Utils {
         int humidity=0;int max=0,min=0;
         String city="",weatherInfo="";
         try {
+            /// base Json OBject
             JSONObject baseJson = new JSONObject(jsonResponse);
+            /// main branch
             String main = baseJson.getString("main");
+            /// the weather branch
             String weather = baseJson.getString("weather");
             JSONArray weather_Json = new JSONArray(weather);
             JSONObject jsonObject = weather_Json.getJSONObject(0);
@@ -81,6 +85,7 @@ public class Utils {
             max = mainJson.getInt("temp_max");
             min = mainJson.getInt("temp_min");
             city = baseJson.getString("name");
+            Log.i("TAG_I",""+temp+"-"+humidity+" ");
 
         } catch (JSONException e) {
             e.printStackTrace();
